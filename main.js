@@ -91,9 +91,18 @@ function fromCsvToJson(csv) {
 }
 
 function main() {
-    const csvData = readCsvFromFile('./data/test1.csv');
+    const csvData = readCsvFromFile(originPath);
+    // const csvData = readCsvFromFile('./data/test1.csv');
     const json = fromCsvToJson(csvData);
-    writeJsonToFile('./output/test1.json', json);
+    writeJsonToFile(destinationPath);
+    // writeJsonToFile('./output/test1.json', json);
+}
+
+const [,, originPath, destinationPath] = process.argv;
+if (originPath && destinationPath) {
+    main(originPath, destinationPath);
+} else {
+    console.log("Usage: node main.js <originPath> <destinationPath>");
 }
 
 main();

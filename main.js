@@ -90,19 +90,29 @@ function fromCsvToJson(csv) {
     return json;
 }
 
+function getOriginPath(){
+    return process.argv[2];
+}
+
+function getDestinationPath(){
+    return process.argv[3];
+}
+
 function main() {
+    const originPath = getOriginPath();
     const csvData = readCsvFromFile(originPath);
     // const csvData = readCsvFromFile('./data/test1.csv');
     const json = fromCsvToJson(csvData);
-    writeJsonToFile(destinationPath);
+    const destinationPath = getDestinationPath()
+    writeJsonToFile(destinationPath, json);
     // writeJsonToFile('./output/test1.json', json);
 }
 
-const [,, originPath, destinationPath] = process.argv;
-if (originPath && destinationPath) {
-    main(originPath, destinationPath);
-} else {
-    console.log("Usage: node main.js <originPath> <destinationPath>");
-}
+// const [,, originPath, destinationPath] = process.argv;
+// if (originPath && destinationPath) {
+//     main(originPath, destinationPath);
+// } else {
+//     console.log("Usage: node main.js <originPath> <destinationPath>");
+// }
 
 main();

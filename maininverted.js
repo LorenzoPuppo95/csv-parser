@@ -42,15 +42,20 @@ function fromJsonToCsv(jsonArray) {
     return csv;
 }
 
-function main(originPath, destinationPath) {
+function getOriginPath(){
+    return process.argv[2];
+}
+
+function getDestinationPath(){
+    return process.argv[3];
+}
+
+function main() {
+    const originPath = getOriginPath();
     const jsonArray = readJsonFromFile(originPath);
     const csv = fromJsonToCsv(jsonArray);
+    const destinationPath = getDestinationPath();
     writeCsvToFile(destinationPath, csv);
 }
 
-const [,, originPath, destinationPath] = process.argv;
-if (originPath && destinationPath) {
-    main(originPath, destinationPath);
-} else {
-    console.log("Usage: node json-to-csv.js <originPath> <destinationPath>");
-}
+main();
